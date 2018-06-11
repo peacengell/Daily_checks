@@ -14,6 +14,7 @@ URL=$1
 SERVER=$2
 MAGENTO_ROOT=$3
 
+
 if  [ -z ${MAGENTO_ROOT} ]
 then
     MAGENTO_ROOT="/var/www/magento/current"
@@ -41,6 +42,9 @@ done
 
 if [ -z ${SERVER} ]
 then
+    echo "You need to check the disk space manually."
+    exit 0
+else
     
     # Check Diskspace  => 75% Used and for sqldumps
     for line in $(cat ${SERVER})
@@ -55,6 +59,5 @@ then
         ssh -o loglevel=error $line sudo ls -lrt /tmp/|grep sql;
         echo "==================================="
     done
-else
-    echo "You need to check the disk space manually."
 fi
+
