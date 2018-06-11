@@ -26,7 +26,7 @@ while read line
 do
     echo $line
     curl -sIl $line | grep HTTP
-    echo '====================================='
+    echo "====================================="
 done
 
 # Check expose version
