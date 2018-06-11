@@ -38,17 +38,23 @@ do
     curl -sIl $line | egrep -i 'server|powered'
 done
 
-# Check Diskspace  => 75% Used and for sqldumps
-for line in $(cat ${SERVER})
-do
-    echo "Check disk usage..."
-    echo $line
-    ssh -o loglevel=error $line df -h|grep "75%"
-    echo "==================================="
-    echo "Check for SQL dumps..."
-    ssh -o loglevel=error $line sudo ls -lrt ${MAGENTO_ROOT}|grep sql;
-    ssh -o loglevel=error $line sudo ls -lrt ${MAGENTO_ROOT}/htdocs/var/|grep sql;
-    ssh -o loglevel=error $line sudo ls -lrt /tmp/|grep sql;
-    echo "==================================="
-done
 
+if [ -z ${SERVER} ]
+then
+    
+    # Check Diskspace  => 75% Used and for sqldumps
+    for line in $(cat ${SERVER})
+    do
+        echo "Check disk usage..."
+        echo $line
+        ssh -o loglevel=error $line df -h|grep "75%"
+        echo "==================================="
+        echo "Check for SQL dumps..."
+        ssh -o loglevel=error $line sudo ls -lrt ${MAGENTO_ROOT}|grep sql;
+        ssh -o loglevel=error $line sudo ls -lrt ${MAGENTO_ROOT}/htdocs/var/|grep sql;
+        ssh -o loglevel=error $line sudo ls -lrt /tmp/|grep sql;
+        echo "==================================="
+    done
+else
+    echo "You need to check the disk space manually."
+fi
