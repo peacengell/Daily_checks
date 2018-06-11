@@ -51,7 +51,7 @@ else
     do
         echo "Check disk usage..."
         echo $line
-        ssh -o loglevel=error $line df -h|grep "75%"
+        ssh -o loglevel=error $line df -h | grep "[7-9][0-9]%"
         echo "==================================="
         echo "Check for SQL dumps..."
         ssh -o loglevel=error $line sudo ls -lrt ${MAGENTO_ROOT}|grep sql;
