@@ -16,7 +16,7 @@ MAGENTO_ROOT=$3
 
 if  [ -z ${MAGENTO_ROOT} ]
 then
-    MAGENTO_ROOT="/var/www/magento/current/htdocs/"
+    MAGENTO_ROOT="/var/www/magento/current"
 else
     echo ${MAGENTO_ROOT}
 fi
